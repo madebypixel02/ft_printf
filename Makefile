@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 09:03:14 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/09 09:27:41 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/13 14:24:37 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,36 +30,33 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 CC = gcc
 AR = ar rcs
+DIR_M = mandatory
+DIR_B = bonus
+DIR_OBJ = lib
 LIBFT = libft.a
 NAME = libftprintf.a
 
-SRC_M = mandatory/ft_printf.c				\
-		mandatory/ft_format.c			\
-		mandatory/ft_parse.c			\
-		mandatory/ft_print_chars.c		\
-		mandatory/ft_print_nbrs.c		\
-		mandatory/ft_print_hex.c
+SOURCE_M = ft_printf.c				\
+		ft_format.c			\
+		ft_parse.c			\
+		ft_print_chars.c		\
+		ft_print_nbrs.c		\
+		ft_print_hex.c
 
-SRC_B = bonus/ft_printf_bonus.c				\
-		bonus/ft_format_bonus.c			\
-		bonus/ft_parse_bonus.c			\
-		bonus/ft_print_chars_bonus.c		\
-		bonus/ft_print_nbrs_bonus.c		\
-		bonus/ft_print_hex_bonus.c
+SOURCE_B = ft_printf_bonus.c				\
+		ft_format_bonus.c			\
+		ft_parse_bonus.c			\
+		ft_print_chars_bonus.c		\
+		ft_print_nbrs_bonus.c		\
+		ft_print_hex_bonus.c
 
-OBJ_M = lib/ft_printf.o				\
-		lib/ft_format.o			\
-		lib/ft_parse.o			\
-		lib/ft_print_chars.o		\
-		lib/ft_print_nbrs.o		\
-		lib/ft_print_hex.o
+SRC_M = $(addprefix $(DIR_M)/, $(SOURCE_M))
 
-OBJ_B = lib/ft_printf_bonus.o			\
-		lib/ft_format_bonus.o		\
-		lib/ft_parse_bonus.o		\
-		lib/ft_print_chars_bonus.o	\
-		lib/ft_print_nbrs_bonus.o	\
-		lib/ft_print_hex_bonus.o
+SRC_B = $(addprefix $(DIR_B)/, $(SOURCE_B))
+
+OBJ_M = $(addprefix $(DIR_OBJ)/, $(SOURCE_M:.c=.o))
+
+OBJ_B = $(addprefix $(DIR_OBJ)/, $(SOURCE_B:.c=.o))
 
 all: $(NAME)
 	@$(ECHO) "$(GREEN)$(NAME) Compilation Complete!$(DEFAULT)"
@@ -70,7 +67,7 @@ $(NAME): $(OBJ_M) $(LIBFT)
 $(OBJ_M): $(SRC_M)
 	@$(ECHO) "$(RED)Mandatory objects outdated in ft_printf! Compiling again...$(DEFAULT)"
 	@$(CC) $(CFLAGS) -c $(SRC_M)
-	@mv -f ft_format.o ft_parse.o ft_print_chars.o ft_print_hex.o ft_print_nbrs.o ft_printf.o lib/
+	@mv -f $(SOURCE_M:.c=.o) $(DIR_OBJ)
 
 bonus: $(OBJ_B) $(LIBFT)
 	@$(AR) $(NAME) $(OBJ_B)
@@ -79,7 +76,7 @@ bonus: $(OBJ_B) $(LIBFT)
 $(OBJ_B): $(SRC_B)
 	@$(ECHO) "$(RED)Bonus objects outdated in ft_printf! Compiling again...$(DEFAULT)"
 	@$(CC) $(CFLAGS) -c $(SRC_B)
-	@mv -f ft_format_bonus.o ft_parse_bonus.o ft_print_chars_bonus.o ft_print_hex_bonus.o ft_print_nbrs_bonus.o ft_printf_bonus.o lib/
+	@mv -f $(SOURCE_B:.c=.o) $(DIR_OBJ)
 
 $(LIBFT):
 	@make all -C libft
