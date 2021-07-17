@@ -6,7 +6,7 @@ Because ft_putstr & ft_putnbr aren't enough :stuck_out_tongue_winking_eye:
 
 * [ft_print what?](#ft_print-what)
 * [Capabilities](#capabilities)
-* [Bonuses](#bonuses)
+* [Bonus](#bonus)
 * [Limitations](#limitations)
 * [Installation](#installation)
 * [Summary](#summary)
@@ -52,7 +52,7 @@ The general idea of the function is to iterate over ``str`` and print normally u
 %[Flags][Width].[Precision][Specifier]
 ```
 
-## Bonuses
+## Bonus
 As of July 2021, the subject for this project has changed, and the flags ``-0.`` are now part of the bonuses. Also the ``*`` flag is gone entirely, though I have decided to keep it in my version of the code, since it took a while to implement and I wish to keep it. Other flags we need to implement in this bonus part are:
 
 | Bonus Flag | Description |
