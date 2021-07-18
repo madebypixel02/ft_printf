@@ -22,13 +22,13 @@ Our version of the printf function will be called ``ft_printf``, and will be abl
 
 | Specifier | Description |
 | :-------: | :---------: |
-| % | Prints the percent character |
-| c | Prints a character |
-| s | Prints a string (array of characters) |
-| d,i | Prints an integer |
-| u | Prints an unsigned integer |
-| x| Prints an unsigned hexadecimal integer (lowecase a-f) |
-| X | Prints an unsigned hexadecimal integer (uppercase A-F) |
+| ``%`` | Prints the percent character |
+| ``c`` | Prints a character |
+| ``s`` | Prints a string (array of characters) |
+| ``d``,``i`` | Prints an integer |
+| ``u`` | Prints an unsigned integer |
+| ``x`` | Prints an unsigned hexadecimal integer (lowecase a-f) |
+| ``X`` | Prints an unsigned hexadecimal integer (uppercase A-F) |
 
 * Flags
 
@@ -36,10 +36,10 @@ Our version of the printf function will be called ``ft_printf``, and will be abl
 | :--: | :---------: |
 | (width) | Specifies the minimum width of the printed variable (adds spaces when necessary) |
 | (precision) | Selects the minimum number of elements of the variable that are printed (Eg. number of chars from a string) |
-| - | Pads text to the left (adds spaces to the right) |
-| 0 | Pads text with zeroes instead of spaces |
-| . | Separates Width and Precision |
-| * | Indicates that the Width or the Precision will be specified using an additional variable |
+| ``-`` | Pads text to the left (adds spaces to the right) |
+| ``0`` | Pads text with zeroes instead of spaces |
+| ``.`` | Separates Width and Precision |
+| ``*`` | Indicates that the Width or the Precision will be specified using an additional variable |
 
 Our ft_printf function has the following prototype:
 ```C
@@ -57,9 +57,9 @@ As of July 2021, the subject for this project has changed, and the flags ``-0.``
 
 | Bonus Flag | Description |
 | :--------: | :---------: |
-| # | Adds "0X" or "0x" to conversions with hexadecimal specifiers (excluding p) for values other than zero |
+| ``#`` | Adds "0X" or "0x" to conversions with hexadecimal specifiers (excluding p) for values other than zero |
 | (space) |A blank space is added provided that no sign is specified |
-| + | Adds a plus sign in front of positive numbers |
+| ``+`` | Adds a plus sign in front of positive numbers |
 
 ## Limitations
 
