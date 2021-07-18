@@ -65,10 +65,10 @@ As of July 2021, the subject for this project has changed, and the flags ``-0.``
 
 As this is quite a straightforward approach at printf, there are a few limitations to consider, namely:
 
-* Our ft_printf does not have buffer management, unlike the real printf
+* Our ``ft_printf`` does not have buffer management, unlike the real printf
 * This implementation of printf doesn't handle overflows and unexpected inputs the same way the real printf would
-* Our ft_printf isn't nearly as powerful as the real prinft since many features are not included
-* ft_printf relies on our personal libft library, which makes it slower in performance when compared to the original printf
+* Our ``ft_printf`` isn't nearly as powerful as the real prinft since many features are not included
+* ``ft_printf`` relies on our personal libft library, which makes it slower in performance when compared to the original printf
 
 ## Installation
 
@@ -80,7 +80,7 @@ gcc clang python-norminette make
 ```
 For Linux users, it is also recommended to install ``valgrind`` (Leak checker)
 
-* Testing the ft_printf function
+* Testing the ``ft_printf`` function
 ```shell
 git clone https://github.com/madebypixel02/ft_printf.git
 cd ft_printf
