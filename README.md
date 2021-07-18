@@ -72,7 +72,7 @@ As this is quite a straightforward approach at printf, there are a few limitatio
 
 ## Installation
 
-Note: ft_printf relies on some functions from the libft library. Make sure you have the libft in the root of the repository and that it includes a Makefile. Currently there is a copy of my own libft.
+Note: ft_printf relies on some functions from the libft library. Make sure you have the libft in the root of the repository and that it includes a Makefile. The command below clones a copy of my ``libft`` to make ``ft_printf`` work.
 In order for you to test this printf, it is recommended that you install the following dependencies:
 
 ```shell
@@ -84,6 +84,7 @@ For Linux users, it is also recommended to install ``valgrind`` (Leak checker)
 ```shell
 git clone https://github.com/madebypixel02/ft_printf.git
 cd ft_printf
+git clone https://github.com/madebypixel02/libft.git
 make
 ```
 Feel free to replace your own libft inside the ``ft_printf`` folder
