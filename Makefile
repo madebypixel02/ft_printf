@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 09:03:14 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/13 14:29:22 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/22 21:09:56 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,19 +66,19 @@ $(NAME): $(OBJ_M) $(LIBFT)
 
 $(OBJ_M): $(SRC_M)
 	@$(ECHO) "$(RED)Mandatory objects outdated in ft_printf! Compiling again...$(DEFAULT)"
-	@$(CC) $(CFLAGS) -c $(SRC_M)
+	@$(CC) $(CFLAGS) -c $^
 	@mv -f $(SOURCE_M:.c=.o) $(DIR_OBJ)
 
 bonus: $(OBJ_B) $(LIBFT)
-	@$(AR) $(NAME) $(OBJ_B)
+	@$(AR) $(NAME) $(OBJ_M)
 	@$(ECHO) "$(MAGENTA)Bonuses Compilation Complete in ft_printf!$(DEFAULT)"
 
 $(OBJ_B): $(SRC_B)
 	@$(ECHO) "$(RED)Bonus objects outdated in ft_printf! Compiling again...$(DEFAULT)"
-	@$(CC) $(CFLAGS) -c $(SRC_B)
+	@$(CC) $(CFLAGS) -c $^
 	@mv -f $(SOURCE_B:.c=.o) $(DIR_OBJ)
 
-$(LIBFT):
+$(LIBFT): libft/
 	@make all -C libft
 	@cp libft/$(LIBFT) $(NAME)
 
