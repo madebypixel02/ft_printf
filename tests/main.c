@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 09:37:37 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/08 10:16:36 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/25 19:52:17 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_leaks(int argc, char *uname)
 {
 	if (!ft_strncmp(uname, "Linux", 5))
 		system("valgrind -q -s --leak-check=full --show-leak-kinds=all\
-		--track-origins=yes --verbose ./a.out");
+		--track-origins=yes ./a.out");
 	else
 		system("leaks a.out && ./a.out");
 	ft_printf("Finished checking leaks on %s!\n", uname);
