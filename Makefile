@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 09:03:14 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/22 21:09:56 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/28 11:34:55 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ AR = ar rcs
 DIR_M = mandatory
 DIR_B = bonus
 DIR_OBJ = lib
-LIBFT = libft.a
+LIBFT = libft/libft.a
 NAME = libftprintf.a
 
 SOURCE_M = ft_printf.c				\
@@ -59,15 +59,15 @@ OBJ_M = $(addprefix $(DIR_OBJ)/, $(SOURCE_M:.c=.o))
 OBJ_B = $(addprefix $(DIR_OBJ)/, $(SOURCE_B:.c=.o))
 
 all: $(NAME)
-	@$(ECHO) "$(GREEN)$(NAME) Compilation Complete!$(DEFAULT)"
 
-$(NAME): $(OBJ_M) $(LIBFT)
-	@$(AR) $(NAME) $(OBJ_M)
+$(NAME): $(OBJ_M) compile_libft
+	@$(AR) $(NAME) $(OBJ_M) $(LIBFT)
 
 $(OBJ_M): $(SRC_M)
 	@$(ECHO) "$(RED)Mandatory objects outdated in ft_printf! Compiling again...$(DEFAULT)"
 	@$(CC) $(CFLAGS) -c $^
 	@mv -f $(SOURCE_M:.c=.o) $(DIR_OBJ)
+	@$(ECHO) "$(GREEN)Mandatory Compilation Complete!$(DEFAULT)"
 
 bonus: $(OBJ_B) $(LIBFT)
 	@$(AR) $(NAME) $(OBJ_M)
@@ -78,9 +78,8 @@ $(OBJ_B): $(SRC_B)
 	@$(CC) $(CFLAGS) -c $^
 	@mv -f $(SOURCE_B:.c=.o) $(DIR_OBJ)
 
-$(LIBFT): libft/
+compile_libft:
 	@make all -C libft
-	@cp libft/$(LIBFT) $(NAME)
 
 test: all
 	@$(ECHO) "$(YELLOW)Performing test with custom main...$(DEFAULT)"
@@ -116,11 +115,11 @@ norminette:
 	@make norminette -C libft/
 
 git:
-	git add ../.
+	git add .
 	git commit
 	git push
 
 re: fclean all
 	@$(ECHO) "$(YELLOW)Cleaned and Rebuilt Everything for $(NAME)!$(DEFAULT)"
 
-.PHONY: all clean fclean bonus re git
+.PHONY: all clean fclean bonus re norminette compile_libft test git
