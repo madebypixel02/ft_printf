@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 09:03:14 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/28 11:34:55 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/28 11:37:50 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ $(OBJ_M): $(SRC_M)
 	@$(ECHO) "$(RED)Mandatory objects outdated in ft_printf! Compiling again...$(DEFAULT)"
 	@$(CC) $(CFLAGS) -c $^
 	@mv -f $(SOURCE_M:.c=.o) $(DIR_OBJ)
-	@$(ECHO) "$(GREEN)Mandatory Compilation Complete!$(DEFAULT)"
+	@$(ECHO) "$(GREEN)Mandatory Compilation Complete in ft_printf!$(DEFAULT)"
 
 bonus: $(OBJ_B) $(LIBFT)
 	@$(AR) $(NAME) $(OBJ_M)
