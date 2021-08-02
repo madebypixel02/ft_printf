@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 09:03:14 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/02 19:09:47 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/02 19:37:26 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ OBJ_B = $(addprefix $(DIR_OBJ)/, $(SOURCE_B:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJ_M) compile_libft
-	@$(AR) $(NAME) $(LIBFT) $(OBJ_M)
+	@$(AR) $(NAME) $(OBJ_M)
 
 $(OBJ_M): $(SRC_M)
 	@$(ECHO) "$(RED)Mandatory objects outdated in ft_printf! Compiling again...$(DEFAULT)"
@@ -69,8 +69,8 @@ $(OBJ_M): $(SRC_M)
 	@mv -f $(SOURCE_M:.c=.o) $(DIR_OBJ)
 	@$(ECHO) "$(GREEN)Mandatory Compilation Complete in ft_printf!$(DEFAULT)"
 
-bonus: $(OBJ_B) $(LIBFT)
-	@$(AR) $(NAME) $(OBJ_M)
+bonus: $(OBJ_B) compile_libft
+	@$(AR) $(NAME) $(OBJ_B)
 	@$(ECHO) "$(MAGENTA)Bonuses Compilation Complete in ft_printf!$(DEFAULT)"
 
 $(OBJ_B): $(SRC_B)
@@ -80,12 +80,13 @@ $(OBJ_B): $(SRC_B)
 
 compile_libft:
 	@make all -C libft
+	@cp $(LIBFT) $(NAME)
 
 test: all
 	@$(ECHO) "$(YELLOW)Performing test with custom main...$(DEFAULT)"
 	@$(CC) -c tests/main.c
 	@$(CC) main.o $(NAME)
-	./a.out $(UNAME) | cat -e
+	@./a.out $(UNAME) | cat -e
 	@$(RM) main.o a.out
 	@$(ECHO) "$(GREEN)Test Complete!$(DEFAULT)"
 
@@ -104,7 +105,6 @@ clean:
 
 fclean: clean
 	@$(RM) $(LIBFT)
-	@$(RM) libft/$(LIBFT)
 	@$(RM) $(NAME)
 	@$(ECHO) "$(CYAN)Removed $(NAME)$(DEFAULT)"
 	@$(ECHO) "$(CYAN)Removed $(LIBFT)$(DEFAULT)"
