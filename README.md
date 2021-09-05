@@ -1,6 +1,6 @@
 # ft_printf
 
-Because ft_putstr & ft_putnbr aren't enough :stuck_out_tongue_winking_eye:
+*Because ft_putstr & ft_putnbr aren't enough :stuck_out_tongue_winking_eye:*
 
 ### Table of Contents
 
