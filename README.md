@@ -97,7 +97,6 @@ The makefile compiles all files from the ``mandatory/`` or ``bonus/`` folders an
 ```
 make all		Compiles the libftprintf.a file
 make test		Compiles ft_printf and libft with a custom main. Checks for leaks in Mac and Linux
-make test2		Another test from a fellow 42 student, also checks for leaks (Mac only)
 make bonus		Compiles all bonus files instead of the mandatory ones
 make norminette		Checks Norm for both printf and libft files	
 make git		Stages every modified file to commit and pushes to upstream branch

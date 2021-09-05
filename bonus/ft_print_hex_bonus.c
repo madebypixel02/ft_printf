@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_hex.c                                     :+:      :+:    :+:   */
+/*   ft_print_hex_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 10:26:21 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/08 09:48:49 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/05 19:54:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_recursive_hex(t_format f, size_t n, size_t iteration)
 	return (count);
 }
 
-int	ft_print_x_X(t_format f, va_list ap)
+int	ft_print_x(t_format f, va_list ap)
 {
 	int				count;
 	unsigned int	n;
