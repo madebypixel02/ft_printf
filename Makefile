@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 09:03:14 by aperez-b          #+#    #+#              #
-#    Updated: 2021/09/05 20:18:08 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/09/27 19:37:29 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,59 +28,64 @@ ifeq ($(UNAME), Linux)
 endif
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
-CC = gcc
+CC = gcc -MD
 AR = ar rcs
-DIR_M = mandatory
-DIR_B = bonus
-DIR_OBJ = lib
-LIBFT = libft/libft.a
-NAME = libftprintf.a
+SRC_DIR = src
+INC_DIR = inc
+SRCB_DIR = srcb
+OBJ_DIR = obj
+OBJB_DIR = objb
+BIN_DIR = bin
+BIN = libftprintf.a
+NAME = $(BIN_DIR)/$(BIN)
+LIBFT = libft/bin/libft.a
 
-SOURCE_M = ft_printf.c				\
+
+SRC = ft_printf.c			\
 		ft_format.c			\
 		ft_parse.c			\
 		ft_print_chars.c		\
 		ft_print_nbrs.c		\
 		ft_print_hex.c
 
-SOURCE_B = ft_printf_bonus.c				\
+SRCB = ft_printf_bonus.c			\
 		ft_format_bonus.c			\
 		ft_parse_bonus.c			\
 		ft_print_chars_bonus.c		\
 		ft_print_nbrs_bonus.c		\
 		ft_print_hex_bonus.c
 
-SRC_M = $(addprefix $(DIR_M)/, $(SOURCE_M))
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-SRC_B = $(addprefix $(DIR_B)/, $(SOURCE_B))
-
-OBJ_M = $(addprefix $(DIR_OBJ)/, $(SOURCE_M:.c=.o))
-
-OBJ_B = $(addprefix $(DIR_OBJ)/, $(SOURCE_B:.c=.o))
+OBJB = $(addprefix $(OBJB_DIR)/, $(SRCB:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJ_M) compile_libft
-	@$(AR) $(NAME) $(OBJ_M)
+$(NAME): create_dirs compile_libft $(OBJ)
+	@$(AR) $(NAME) $(OBJ)
+	@$(ECHO) "$(GREEN)$(BIN) is up to date!$(DEFAULT)"
 
-$(OBJ_M): $(SRC_M)
-	@$(ECHO) "$(RED)Mandatory objects outdated in ft_printf! Compiling again...$(DEFAULT)"
-	@$(CC) $(CFLAGS) -c $^
-	@mv -f $(SOURCE_M:.c=.o) $(DIR_OBJ)
-	@$(ECHO) "$(GREEN)Mandatory Compilation Complete in ft_printf!$(DEFAULT)"
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@$(ECHO) "Compiling $(BLUE)$<$(DEFAULT)..."
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(OBJ_B) compile_libft
-	@$(AR) $(NAME) $(OBJ_B)
-	@$(ECHO) "$(MAGENTA)Bonuses Compilation Complete in ft_printf!$(DEFAULT)"
+bonus: create_dirs compile_libft $(OBJB)
+	@$(AR) $(NAME) $(OBJB)
+	@$(ECHO) "$(MAGENTA)Bonus Functions Compilation Complete in ft_printf!$(DEFAULT)"
 
-$(OBJ_B): $(SRC_B)
-	@$(ECHO) "$(RED)Bonus objects outdated in ft_printf! Compiling again...$(DEFAULT)"
-	@$(CC) $(CFLAGS) -c $^
-	@mv -f $(SOURCE_B:.c=.o) $(DIR_OBJ)
+$(OBJB_DIR)/%.o: $(SRCB_DIR)/%.c
+	@$(ECHO) "Compiling $(BLUE)$<$(DEFAULT)..."
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 
 compile_libft:
 	@make all -C libft
 	@cp $(LIBFT) $(NAME)
+
+create_dirs:
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJB_DIR)
+	@mkdir -p $(BIN_DIR)
 
 test: all
 	@$(ECHO) "$(YELLOW)Performing test with custom main...$(DEFAULT)"
@@ -91,11 +96,13 @@ test: all
 	@$(ECHO) "$(GREEN)Test Complete!$(DEFAULT)"
 
 clean:
-	@$(ECHO) "$(BLUE)Cleaning up object files in ft_printf...$(DEFAULT)"
+	@$(ECHO) "$(CYAN)Cleaning up object files in ft_printf...$(DEFAULT)"
 	@make clean -C libft
-	@$(RM) $(OBJ_M) $(OBJ_B)
+	@$(RM) -r $(OBJ_DIR)
+	@$(RM) -r $(OBJB_DIR)
 
 fclean: clean
+	@$(RM) -r $(BIN_DIR)
 	@$(RM) $(LIBFT)
 	@$(RM) $(NAME)
 	@$(ECHO) "$(CYAN)Removed $(NAME)$(DEFAULT)"
@@ -103,7 +110,7 @@ fclean: clean
 
 norminette:
 	@$(ECHO) "$(CYAN)\nChecking norm for ft_printf...$(DEFAULT)"
-	@norminette -R CheckForbiddenSourceHeader $(SRC_M) $(SRC_B) lib/ft_printf.h
+	@norminette -R CheckForbiddenSourceHeader $(SRC) $(SRCB) $(INC_DIR)
 	@make norminette -C libft/
 
 git:
@@ -114,4 +121,7 @@ git:
 re: fclean all
 	@$(ECHO) "$(YELLOW)Cleaned and Rebuilt Everything for $(NAME)!$(DEFAULT)"
 
-.PHONY: all clean fclean bonus re norminette compile_libft test git
+-include $(OBJ_DIR)/*.d
+-include $(OBJB_DIR)/*.d
+
+.PHONY: all clean fclean bonus re norminette compile_libft create_dirs test git

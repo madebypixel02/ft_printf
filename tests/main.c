@@ -6,11 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 09:37:37 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/26 17:54:10 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 19:03:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/ft_printf.h"
+#include "../inc/ft_printf.h"
 #include <limits.h>
 
 /* ******** Leaks ******** */

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 09:11:41 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/09/05 20:17:19 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 19:00:02 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define FT_PRINTF_H
 
-# include "../libft/lib/libft.h"
+# include "../libft/inc/libft.h"
 # include <stdarg.h>
 
 /* Struct to keep track of various format parameters */

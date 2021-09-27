@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_bonus.c                                   :+:      :+:    :+:   */
+/*   ft_parse_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 09:01:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/08 09:49:44 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 19:30:58 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/ft_printf.h"
+#include "../inc/ft_printf_bonus.h"
 
 static t_format	ft_parse_bonus(char *str, t_format f)
 {
