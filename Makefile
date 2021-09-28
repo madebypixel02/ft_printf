@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 09:03:14 by aperez-b          #+#    #+#              #
-#    Updated: 2021/09/27 19:40:13 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/09/27 19:56:16 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,6 @@ clean:
 fclean: clean
 	@$(RM) -r $(BIN_DIR)
 	@$(RM) $(LIBFT)
-	@$(RM) $(NAME)
 	@$(ECHO) "$(CYAN)Removed $(NAME)$(DEFAULT)"
 	@$(ECHO) "$(CYAN)Removed $(LIBFT)$(DEFAULT)"
 
