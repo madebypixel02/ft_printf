@@ -102,13 +102,9 @@ make norminette		Checks Norm for both printf and libft files
 make git		Stages every modified file to commit and pushes to upstream branch
 ```
 
-* Examples:
+* Example:
 
-![make re (ft_printf)](https://i.imgur.com/hmeMA9f.png)
-
-![make re (ft_printf)](https://i.imgur.com/BODJ7F8.png)
-
-Note: The above example performs differently in Linux and Mac OS, that's why the outputs are different. My ft_printf mimics what Mac would do
+![Screen-recording-2021-10-16-1155](https://user-images.githubusercontent.com/40824677/137583199-d730447e-d037-4d38-8cf1-1568d3416011.gif)
 
 
 ## Summary
