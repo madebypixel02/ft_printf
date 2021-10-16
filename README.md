@@ -92,7 +92,7 @@ Feel free to replace your own libft inside the ``ft_printf`` folder
 
 * Usage:
 
-The makefile compiles all files from the ``mandatory/`` or ``bonus/`` folders and saves the object files to the ``lib/`` folder. It then generates the output file ``libftprintf.a``. Here are some of the commands you can try:
+The makefile compiles all files from the ``src/`` or ``srcb/`` folders and saves the object files to the ``obj/`` and ``objb/`` folders. It then generates the output file ``libftprintf.a`` inside the ``bin/`` folder. Here are some of the commands you can try:
 
 ```
 make all		Compiles the libftprintf.a file
