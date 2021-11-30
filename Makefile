@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 09:03:14 by aperez-b          #+#    #+#              #
-#    Updated: 2021/11/30 14:38:34 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/11/30 14:50:23 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,7 +118,9 @@ fclean: clean
 norminette:
 	@$(ECHO) "$(CYAN)\nChecking norm for ft_printf...$(DEFAULT)"
 	@norminette -R CheckForbiddenSourceHeader $(SRC_DIR) $(SRCB_DIR) $(INC_DIR)
-	@make norminette -C libft/
+	@if [ -d "libft" ]; then \
+		make norminette -C libft/; \
+	fi
 
 git:
 	git add .
