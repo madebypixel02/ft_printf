@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 09:03:14 by aperez-b          #+#    #+#              #
-#    Updated: 2021/09/27 19:56:16 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/11/30 14:38:34 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,8 +77,10 @@ $(OBJB_DIR)/%.o: $(SRCB_DIR)/%.c
 	@$(ECHO) "Compiling $(BLUE)$<$(DEFAULT)..."
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-
 compile_libft:
+	@if [ ! -d "libft" ]; then \
+		git clone https://github.com/madebypixel02/libft.git; \
+	fi
 	@make all -C libft
 	@cp $(LIBFT) $(NAME)
 
@@ -97,15 +99,21 @@ test: all
 
 clean:
 	@$(ECHO) "$(CYAN)Cleaning up object files in ft_printf...$(DEFAULT)"
-	@make clean -C libft
+	@if [ -d "libft" ]; then \
+		make clean -C libft; \
+	fi
 	@$(RM) -r $(OBJ_DIR)
 	@$(RM) -r $(OBJB_DIR)
 
 fclean: clean
 	@$(RM) -r $(BIN_DIR)
-	@$(RM) $(LIBFT)
+	@if [ -d "libft" ]; then \
+		$(RM) $(LIBFT); \
+	fi
 	@$(ECHO) "$(CYAN)Removed $(NAME)$(DEFAULT)"
-	@$(ECHO) "$(CYAN)Removed $(LIBFT)$(DEFAULT)"
+	@if [ -d "libft" ]; then \
+		$(ECHO) "$(CYAN)Removed $(LIBFT)$(DEFAULT)"; \
+	fi
 
 norminette:
 	@$(ECHO) "$(CYAN)\nChecking norm for ft_printf...$(DEFAULT)"
