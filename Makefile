@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 09:03:14 by aperez-b          #+#    #+#              #
-#    Updated: 2021/12/15 15:20:07 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/12/15 18:25:21 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,12 @@ WHITE = \033[0;97m
 
 SHELL=/bin/bash
 UNAME = $(shell uname -s)
-ECHO = echo
+PRINTF = echo
 ifeq ($(UNAME), Linux)
-	ECHO = echo -e
+	PRINTF = echo -e
 endif
+
+# Make variables
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 CC = gcc -MD
@@ -39,6 +41,7 @@ OBJB_DIR = objb
 BIN_DIR = bin
 BIN = libftprintf.a
 NAME = $(BIN_DIR)/$(BIN)
+PRINTF = LC_NUMERIC="en_US.UTF-8" printf
 LIBFT = libft/bin/libft.a
 
 
@@ -60,22 +63,31 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 OBJB = $(addprefix $(OBJB_DIR)/, $(SRCB:.c=.o))
 
+# Progress vars
+SRC_COUNT_TOT := $(shell expr $(shell echo -n $(SRC) | wc -w) - $(shell ls -l $(OBJ_DIR) 2>&1 | grep ".o" | wc -l) + 1)
+SRC_COUNT := 0
+SRC_PCT = $(shell expr 100 \* $(SRC_COUNT) / $(SRC_COUNT_TOT))
+SRCB_COUNT_TOT := $(shell expr $(shell echo -n $(SRCB) | wc -w) - $(shell ls -l $(OBJB_DIR) 2>&1 | grep ".o" | wc -l) + 1)
+SRCB_COUNT := 0
+SRCB_PCT = $(shell expr 100 \* $(SRCB_COUNT) / $(SRCB_COUNT_TOT))
+
 all: $(NAME)
 
 $(NAME): create_dirs compile_libft $(OBJ)
 	@$(AR) $(NAME) $(OBJ)
-	@$(ECHO) "$(GREEN)$(BIN) is up to date!$(DEFAULT)"
+	@$(PRINTF) "\r%100s\r$(GREEN)$(BIN) is up to date!$(DEFAULT)\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@$(ECHO) "Compiling $(BLUE)$<$(DEFAULT)..."
+	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
+	@$(PRINTF) "\r%100s\r[ %d/%d (%d%%) ] Compiling $(BLUE)$<$(DEFAULT)..." "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: create_dirs compile_libft $(OBJB)
 	@$(AR) $(NAME) $(OBJB)
-	@$(ECHO) "$(MAGENTA)Bonus Functions Compilation Complete in ft_printf!$(DEFAULT)"
 
 $(OBJB_DIR)/%.o: $(SRCB_DIR)/%.c
-	@$(ECHO) "Compiling $(BLUE)$<$(DEFAULT)..."
+	@$(eval SRCB_COUNT = $(shell expr $(SRCB_COUNT) + 1))
+	@$(PRINTF) "\r%100s\r[ %d/%d (%d%%) ] Compiling $(BLUE)$<$(DEFAULT)..." "" $(SRCB_COUNT) $(SRCB_COUNT_TOT) $(SRCB_PCT)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 compile_libft:
@@ -91,15 +103,15 @@ create_dirs:
 	@mkdir -p $(BIN_DIR)
 
 test: all
-	@$(ECHO) "$(YELLOW)Performing test with custom main...$(DEFAULT)"
+	@$(PRINTF) "$(YELLOW)Performing test with custom main...$(DEFAULT)\n"
 	@$(CC) -c tests/main.c
 	@$(CC) main.o $(NAME)
 	@./a.out $(UNAME) | cat -e
 	@$(RM) main.o a.out
-	@$(ECHO) "$(GREEN)Test Complete!$(DEFAULT)"
+	@$(PRINTF) "$(GREEN)Test Complete!$(DEFAULT)\n"
 
 clean:
-	@$(ECHO) "$(CYAN)Cleaning up object files in ft_printf...$(DEFAULT)"
+	@$(PRINTF) "$(CYAN)Cleaning up object files in ft_printf...$(DEFAULT)\n"
 	@if [ -d "libft" ]; then \
 		make clean -C libft; \
 	fi
@@ -111,13 +123,13 @@ fclean: clean
 	@if [ -d "libft" ]; then \
 		$(RM) $(LIBFT); \
 	fi
-	@$(ECHO) "$(CYAN)Removed $(NAME)$(DEFAULT)"
+	@$(PRINTF) "$(CYAN)Removed $(NAME)$(DEFAULT)\n"
 	@if [ -d "libft" ]; then \
-		$(ECHO) "$(CYAN)Removed $(LIBFT)$(DEFAULT)"; \
+		$(PRINTF) "$(CYAN)Removed $(LIBFT)$(DEFAULT)\n"; \
 	fi
 
 norminette:
-	@$(ECHO) "$(CYAN)\nChecking norm for ft_printf...$(DEFAULT)"
+	@$(PRINTF) "$(CYAN)\nChecking norm for ft_printf...$(DEFAULT)\n"
 	@norminette -R CheckForbiddenSourceHeader $(SRC_DIR) $(SRCB_DIR) $(INC_DIR)
 	@if [ -d "libft" ]; then \
 		make norminette -C libft/; \
@@ -128,8 +140,8 @@ git:
 	git commit
 	git push
 
-re: fclean all
-	@$(ECHO) "$(YELLOW)Cleaned and Rebuilt Everything for $(NAME)!$(DEFAULT)"
+re: fclean
+	@make all
 
 -include $(OBJ_DIR)/*.d
 -include $(OBJB_DIR)/*.d
