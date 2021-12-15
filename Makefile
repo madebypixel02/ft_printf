@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 09:03:14 by aperez-b          #+#    #+#              #
-#    Updated: 2021/12/15 18:25:21 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/12/15 18:27:37 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,6 @@ CYAN = \033[0;96m
 WHITE = \033[0;97m
 
 SHELL=/bin/bash
-UNAME = $(shell uname -s)
-PRINTF = echo
-ifeq ($(UNAME), Linux)
-	PRINTF = echo -e
-endif
 
 # Make variables
 CFLAGS = -Wall -Wextra -Werror
