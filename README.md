@@ -102,8 +102,7 @@ make git		Stages every modified file to commit and pushes to upstream branch
 
 * Example:
 
-![Screen-recording-2021-10-16-1155](https://user-images.githubusercontent.com/40824677/137583199-d730447e-d037-4d38-8cf1-1568d3416011.gif)
-
+![ft_printf](https://user-images.githubusercontent.com/40824677/146548168-c5f4142c-b174-44fe-9c20-11f113bd746d.gif)
 
 ## Summary
 
