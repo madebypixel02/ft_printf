@@ -30,6 +30,7 @@ Our version of the printf function will be called ``ft_printf``, and will be abl
 | ``c`` | Prints a character |
 | ``s`` | Prints a string (array of characters) |
 | ``d``,``i`` | Prints an integer |
+| ``p`` | Prints pointer address (hex starting with ``0x``) |
 | ``u`` | Prints an unsigned integer |
 | ``x`` | Prints an unsigned hexadecimal integer (lowecase a-f) |
 | ``X`` | Prints an unsigned hexadecimal integer (uppercase A-F) |
