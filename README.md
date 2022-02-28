@@ -114,3 +114,9 @@ make git		Stages every modified file to commit and pushes to upstream branch
 This was my second project as a 42 student in Madrid. Looking forward to the new projects coming next!
 
 July 9th, 2021
+
+<p align="center">
+  <a href="https://github.com/madebypixel02/libft">&#11013;</a>
+  <a href="https://github.com/madebypixel02/42-Madrid-Cursus">&#127968;</a>
+  <a href="https://github.com/madebypixel02/ft_printf">&#10145;</a>
+</p>
