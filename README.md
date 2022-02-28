@@ -118,5 +118,5 @@ July 9th, 2021
 <p align="center">
   <a href="https://github.com/madebypixel02/libft">&#11013;</a>
   <a href="https://github.com/madebypixel02/42-Madrid-Cursus">&#127968;</a>
-  <a href="https://github.com/madebypixel02/ft_printf">&#10145;</a>
+  <a href="https://github.com/madebypixel02/get_next_line">&#10145;</a>
 </p>
