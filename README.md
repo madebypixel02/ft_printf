@@ -1,4 +1,4 @@
-# ft_printf
+# ft_printf | 42 Madrid
 
 *Because ft_putstr & ft_putnbr aren't enough :stuck_out_tongue_winking_eye:*
 
