@@ -2,9 +2,9 @@
 
 *Because ft_putstr & ft_putnbr aren't enough :stuck_out_tongue_winking_eye:*
 
-<p align="center">
+<div align="center">
   <img src=https://user-images.githubusercontent.com/40824677/149224740-dbaff244-68d7-4907-bb38-3f6e6b934655.png />
-</p>
+</div>
 
 ### Table of Contents
 
@@ -114,9 +114,3 @@ make git		Stages every modified file to commit and pushes to upstream branch
 This was my second project as a 42 student in Madrid. Looking forward to the new projects coming next!
 
 July 9th, 2021
-
-<p align="center">
-  <a href="https://github.com/madebypixel02/libft">&#11013;</a>
-  <a href="https://github.com/madebypixel02/42-Madrid-Cursus">&#127968;</a>
-  <a href="https://github.com/madebypixel02/get_next_line">&#10145;</a>
-</p>
