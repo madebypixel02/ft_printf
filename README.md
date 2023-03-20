@@ -86,7 +86,7 @@ For Linux users, it is also recommended to install ``valgrind`` (Leak checker)
 
 * Testing the ``ft_printf`` function
 ```shell
-git clone https://github.com/madebypixel02/ft_printf.git
+git clone https://gitlab.com/madebypixel02/ft_printf.git
 cd ft_printf
 make
 ```
