@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 09:03:14 by aperez-b          #+#    #+#              #
-#    Updated: 2021/12/15 19:44:21 by aperez-b         ###   ########.fr        #
+#    Updated: 2023/04/05 12:33:44 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ WHITE = \033[0;97m
 SHELL=/bin/bash
 
 # Make variables
+PRINTF = printf
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 CC = gcc -MD
@@ -36,9 +37,8 @@ OBJB_DIR = objb
 BIN_DIR = bin
 BIN = libftprintf.a
 NAME = $(BIN_DIR)/$(BIN)
-PRINTF = LC_NUMERIC="en_US.UTF-8" printf
 LIBFT = libft/bin/libft.a
-
+LIBFT_SRC = $(shell ls libft/src*/*.c)
 
 SRC = ft_printf.c			\
 		ft_format.c			\
@@ -74,34 +74,32 @@ SRCB_PCT = $(shell expr 100 \* $(SRCB_COUNT) / $(SRCB_COUNT_TOT))
 
 all: $(NAME)
 
-$(NAME): create_dirs compile_libft $(OBJ)
+$(NAME): $(LIBFT) $(OBJ)
 	@$(AR) $(NAME) $(OBJ)
 	@$(PRINTF) "\r%100s\r$(GREEN)$(BIN) is up to date!$(DEFAULT)\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
 	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
 	@$(PRINTF) "\r%100s\r[ %d/%d (%d%%) ] Compiling $(BLUE)$<$(DEFAULT)..." "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: create_dirs compile_libft $(OBJB)
+bonus: $(LIBFT) $(OBJB)
 	@$(AR) $(NAME) $(OBJB)
 
 $(OBJB_DIR)/%.o: $(SRCB_DIR)/%.c
+	@mkdir -p $(OBJB_DIR)
 	@$(eval SRCB_COUNT = $(shell expr $(SRCB_COUNT) + 1))
 	@$(PRINTF) "\r%100s\r[ %d/%d (%d%%) ] Compiling $(BLUE)$<$(DEFAULT)..." "" $(SRCB_COUNT) $(SRCB_COUNT_TOT) $(SRCB_PCT)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-compile_libft:
+$(LIBFT): $(LIBFT_SRC)
 	@if [ ! -d "libft" ]; then \
 		git clone https://gitlab.com/madebypixel02/libft.git; \
 	fi
 	@make all -C libft
-	@cp $(LIBFT) $(NAME)
-
-create_dirs:
-	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJB_DIR)
 	@mkdir -p $(BIN_DIR)
+	@$(AR) $(NAME) $(LIBFT)
 
 test: all
 	@$(PRINTF) "\n$(YELLOW)Performing test with custom main...$(DEFAULT)\n\n"
@@ -123,11 +121,9 @@ fclean: clean
 	@$(RM) -r $(BIN_DIR)
 	@if [ -d "libft" ]; then \
 		$(RM) $(LIBFT); \
-	fi
-	@$(PRINTF) "$(CYAN)Removed $(NAME)$(DEFAULT)\n"
-	@if [ -d "libft" ]; then \
 		$(PRINTF) "$(CYAN)Removed $(LIBFT)$(DEFAULT)\n"; \
 	fi
+	@$(PRINTF) "$(CYAN)Removed $(NAME)$(DEFAULT)\n"
 
 norminette:
 	@$(PRINTF) "$(CYAN)\nChecking norm for ft_printf...$(DEFAULT)\n"
@@ -147,4 +143,4 @@ re: fclean
 -include $(OBJ_DIR)/*.d
 -include $(OBJB_DIR)/*.d
 
-.PHONY: all clean fclean bonus re norminette compile_libft create_dirs test git
+.PHONY: all clean fclean bonus re norminette test git
