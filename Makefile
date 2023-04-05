@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 09:03:14 by aperez-b          #+#    #+#              #
-#    Updated: 2023/04/05 14:02:46 by aperez-b         ###   ########.fr        #
+#    Updated: 2023/04/05 14:06:31 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,6 @@ bonus: $(LIBFT) $(OBJB)
 	@$(PRINTF) "\r%100s\r$(MAGENTA)Bonus $(BIN) is up to date!$(DEFAULT)\n"
 
 $(OBJB_DIR)/%.o: $(SRCB_DIR)/%.c | $(OBJB_DIR)
-	@mkdir -p $(OBJB_DIR)
 	@$(eval SRCB_COUNT = $(shell expr $(SRCB_COUNT) + 1))
 	@$(PRINTF) "\r%100s\r[ %d/%d (%d%%) ] Compiling $(MAGENTA)$<$(DEFAULT)..." "" $(SRCB_COUNT) $(SRCB_COUNT_TOT) $(SRCB_PCT)
 	@$(CC) $(CFLAGS) -c $< -o $@
